@@ -6,6 +6,7 @@
   <img src="https://img.shields.io/badge/Status-Live-06d6a0?style=for-the-badge&logo=vercel&logoColor=white" />
   <img src="https://img.shields.io/badge/Built%20With-HTML%20%7C%20CSS%20%7C%20JS-8b5cf6?style=for-the-badge&logo=html5&logoColor=white" />
   <img src="https://img.shields.io/badge/Theme-Dark%20Glossy-0c0c1a?style=for-the-badge&logo=materialdesignicons&logoColor=white" />
+  <img src="https://img.shields.io/badge/AI%20Assisted-Designed%20with%20AI-f59e0b?style=for-the-badge&logo=openai&logoColor=white" />
   <img src="https://img.shields.io/github/last-commit/ayushtripathi-45/My-Portfolio-Basic-Version-?style=for-the-badge&color=f472b6" />
 </p>
 
@@ -141,8 +142,8 @@ My-Portfolio-Basic-Version-/
 
 | Key | Detail |
 |---|---|
-| **Stack** | React, Flask, MySQL, Python |
-| **Features** | Upload & share notes, search by subject/branch/semester, rating system, PDF preview |
+| **Stack** | HTML, CSS, Bootstrap, React, Node.js, Express, MongoDB, JWT |
+| **Features** | Upload & share notes, search by subject/branch/semester, rating system, PDF preview, JWT authentication |
 
 ---
 
@@ -204,4 +205,8 @@ This project is open source and available under the [MIT License](LICENSE).
 
 <p align="center">
   Made with 💜 by <a href="https://github.com/ayushtripathi-45">Ayush Tripathi</a>
+</p>
+
+<p align="center">
+  <sub>🤖 This portfolio was designed & developed with the assistance of AI models.</sub>
 </p>
