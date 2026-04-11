@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Ayush Tripathi — Full Stack Developer & AI Enthusiast Portfolio" />
+    <meta name="theme-color" content="#030308" />
+    <title>Ayush Tripathi | Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <div class="bg">
+      <div class="orb orb-1" aria-hidden="true"></div>
+      <div class="orb orb-2" aria-hidden="true"></div>
+      <div class="orb orb-3" aria-hidden="true"></div>
+      <div class="grid" aria-hidden="true"></div>
+    </div>
+
+    <header class="header">
+      <nav class="nav container" aria-label="Primary">
+        <a class="brand" href="#home">
+          <span class="brand__dot" aria-hidden="true"></span>
+          <span class="brand__text">Ayush</span>
+        </a>
+
+        <button class="nav__toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="navLinks">
+          <span class="sr-only">Toggle menu</span>
+          <span class="nav__bar" aria-hidden="true"></span>
+          <span class="nav__bar" aria-hidden="true"></span>
+          <span class="nav__bar" aria-hidden="true"></span>
+        </button>
+
+        <div class="nav__links" id="navLinks">
+          <a href="#home">Home</a>
+          <a href="#about">About</a>
+          <a href="#skills">Skills</a>
+          <a href="#projects">Projects</a>
+          <a href="#certifications">Certifications</a>
+          <a href="#internship">Internship</a>
+          <a href="#achievements">Achievements</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="main">
+
+      <!-- ═══════════════ HERO ═══════════════ -->
+      <section class="hero container" id="home">
+        <div class="hero__content glass">
+          <div class="pill">
+            <span class="pill__spark" aria-hidden="true"></span>
+            B.Tech CSE Student • Full Stack Developer • AI Enthusiast
+          </div>
+
+          <p class="welcome" aria-label="Welcome to my portfolio">
+            <span class="welcome__prefix">Welcome to </span>
+            <span class="welcome__type">my portfolio</span>
+          </p>
+
+          <!-- JS will split these into animated letters -->
+          <h1 class="hero__title" data-animate="letters">
+            Ayush <span class="text-grad">Tripathi</span>
+          </h1>
+
+          <!-- JS will split these into animated words -->
+          <p class="hero__subtitle" data-animate="words">
+            I am a Computer Science student passionate about building scalable web applications and AI-powered solutions.
+            I enjoy solving real-world problems using data structures, modern web technologies, and machine learning concepts.
+          </p>
+
+          <div class="hero__cta">
+            <a class="btn btn--primary" href="#projects">View Projects</a>
+            <a class="btn btn--ghost" href="#contact">Contact Me</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════ ABOUT ═══════════════ -->
+      <section class="section container" id="about">
+        <header class="section__header">
+          <h2 class="section__title" data-animate="letters">About Me</h2>
+          <p class="section__subtitle">
+            A short overview of my background and focus.
+          </p>
+        </header>
+
+        <div class="grid-2">
+          <div class="glass pad">
+            <p>
+              I am currently a B.Tech Computer Science student in my 4th semester, moving towards my 5th semester. I have a
+              strong interest in software development, especially in full stack development and artificial intelligence.
+            </p>
+            <p>
+              I enjoy learning by building projects that solve practical problems. My current focus is on developing AI-powered
+              applications and improving my understanding of data structures and algorithms.
+            </p>
+            <p>
+              I am continuously working on enhancing my skills in modern technologies like React, Node.js, and Flask while also
+              strengthening my core computer science fundamentals.
+            </p>
+          </div>
+
+          <div class="glass pad">
+            <h3 class="h3">Highlights</h3>
+            <div class="timeline">
+              <div class="timeline__item">
+                <div class="timeline__dot" aria-hidden="true"></div>
+                <div>
+                  <div class="timeline__title">Full Stack Development</div>
+                  <div class="timeline__text">Building interactive apps with clean UI and solid backend design.</div>
+                </div>
+              </div>
+              <div class="timeline__item">
+                <div class="timeline__dot" aria-hidden="true"></div>
+                <div>
+                  <div class="timeline__title">AI Enthusiast</div>
+                  <div class="timeline__text">Exploring ML concepts to power smart features in real products.</div>
+                </div>
+              </div>
+              <div class="timeline__item">
+                <div class="timeline__dot" aria-hidden="true"></div>
+                <div>
+                  <div class="timeline__title">Core CS</div>
+                  <div class="timeline__text">Strengthening fundamentals: DSA, DBMS, OS, and CO.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-2 mt">
+          <div class="glass pad">
+            <h3 class="h3">Quick Links</h3>
+            <div class="quick-links">
+              <a class="chip" href="mailto:ayushtripathi9821@gmail.com">✉ Email</a>
+              <a class="chip" href="https://linkedin.com/in/ayush-tripathi45" target="_blank" rel="noreferrer">⟐ LinkedIn</a>
+              <a class="chip" href="https://github.com/ayushtripathi-45" target="_blank" rel="noreferrer">⌘ GitHub</a>
+            </div>
+          </div>
+
+          <div class="glass pad">
+            <h3 class="h3">Currently Learning</h3>
+            <ul class="list">
+              <li>React, Node.js, and Flask for full stack apps</li>
+              <li>Machine learning concepts for AI-powered features</li>
+              <li>Data Structures & Algorithms for problem solving</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════ SKILLS ═══════════════ -->
+      <section class="section container" id="skills">
+        <header class="section__header">
+          <h2 class="section__title" data-animate="letters">Skills</h2>
+          <p class="section__subtitle">Technologies I use and study regularly.</p>
+        </header>
+
+        <div class="skills">
+          <article class="glass pad">
+            <h3 class="h3">Programming Languages</h3>
+            <div class="tag-row">
+              <span class="tag">Python</span>
+              <span class="tag">JavaScript</span>
+              <span class="tag">C</span>
+              <span class="tag">C++</span>
+            </div>
+          </article>
+
+          <article class="glass pad">
+            <h3 class="h3">Frontend Development</h3>
+            <div class="tag-row">
+              <span class="tag">HTML</span>
+              <span class="tag">CSS</span>
+              <span class="tag">Bootstrap</span>
+              <span class="tag">React</span>
+            </div>
+          </article>
+
+          <article class="glass pad">
+            <h3 class="h3">Backend Development</h3>
+            <div class="tag-row">
+              <span class="tag">Flask</span>
+              <span class="tag">Node.js</span>
+              <span class="tag">Express</span>
+            </div>
+          </article>
+
+          <article class="glass pad">
+            <h3 class="h3">Database</h3>
+            <div class="tag-row">
+              <span class="tag">MySQL</span>
+            </div>
+          </article>
+
+          <article class="glass pad">
+            <h3 class="h3">Core Subjects</h3>
+            <div class="tag-row">
+              <span class="tag">Data Structures & Algorithms</span>
+              <span class="tag">DBMS</span>
+              <span class="tag">Operating Systems</span>
+              <span class="tag">Computer Organization</span>
+            </div>
+          </article>
+
+          <article class="glass pad">
+            <h3 class="h3">Tools & Technologies</h3>
+            <div class="tag-row">
+              <span class="tag">Git</span>
+              <span class="tag">GitHub</span>
+              <span class="tag">VS Code</span>
+              <span class="tag">Postman</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ═══════════════ PROJECTS ═══════════════ -->
+      <section class="section container" id="projects">
+        <header class="section__header">
+          <h2 class="section__title" data-animate="letters">Projects</h2>
+          <p class="section__subtitle">Currently building — real-world apps with practical impact.</p>
+        </header>
+
+        <div class="projects projects--grid">
+
+          <!-- PROJECT 1 — AI Social Media Dashboard -->
+          <article class="project glass pad">
+            <div class="project__top">
+              <h3 class="h3">AI Social Media Dashboard</h3>
+              <span class="badge badge--status">In Progress</span>
+            </div>
+            <p class="muted">
+              A full-stack web application that provides real-time insights, analytics, and AI-powered content recommendations for social media data. Includes interactive charts, engagement tracking, and sentiment analysis.
+            </p>
+            <div class="project__grid">
+              <div>
+                <div class="mini-title">Tech Stack</div>
+                <div class="tag-row">
+                  <span class="tag">React</span>
+                  <span class="tag">Node.js</span>
+                  <span class="tag">Express</span>
+                  <span class="tag">MySQL</span>
+                </div>
+              </div>
+              <div>
+                <div class="mini-title">Features</div>
+                <ul class="list">
+                  <li>Interactive analytics dashboard</li>
+                  <li>Real-time data visualization</li>
+                  <li>AI-powered content insights</li>
+                  <li>Engagement & sentiment tracking</li>
+                </ul>
+              </div>
+            </div>
+            <div class="project__actions">
+              <button class="btn btn--ghost" type="button" data-toast="🚧 Live demo coming soon — currently in development!">
+                Live Demo
+              </button>
+              <button class="btn btn--ghost" type="button" data-toast="📂 Source code will be published on GitHub soon!">
+                Source Code
+              </button>
+            </div>
+          </article>
+
+          <!-- PROJECT 2 — NotesShare Platform -->
+          <article class="project glass pad">
+            <div class="project__top">
+              <h3 class="h3">NotesShare Platform</h3>
+              <span class="badge badge--status">In Progress</span>
+            </div>
+            <p class="muted">
+              A collaborative platform where students can upload, share, and discover academic notes by subject, branch, and semester. Features include search, rating system, and PDF preview.
+            </p>
+            <div class="project__grid">
+              <div>
+                <div class="mini-title">Tech Stack</div>
+                <div class="tag-row">
+                  <span class="tag">React</span>
+                  <span class="tag">Flask</span>
+                  <span class="tag">MySQL</span>
+                  <span class="tag">Python</span>
+                </div>
+              </div>
+              <div>
+                <div class="mini-title">Features</div>
+                <ul class="list">
+                  <li>Upload & share notes with peers</li>
+                  <li>Search by subject, branch & semester</li>
+                  <li>Rating & review system</li>
+                  <li>PDF preview & download</li>
+                </ul>
+              </div>
+            </div>
+            <div class="project__actions">
+              <button class="btn btn--ghost" type="button" data-toast="🚧 Live demo coming soon — currently in development!">
+                Live Demo
+              </button>
+              <button class="btn btn--ghost" type="button" data-toast="📂 Source code will be published on GitHub soon!">
+                Source Code
+              </button>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- ═══════════════ CERTIFICATIONS ═══════════════ -->
+      <section class="section container" id="certifications">
+        <header class="section__header">
+          <h2 class="section__title" data-animate="letters">Certifications</h2>
+          <p class="section__subtitle">
+            Upload and manage your certificates here (saved in your browser).
+          </p>
+        </header>
+
+        <div class="grid-2">
+          <div class="glass pad">
+            <h3 class="h3">Upload Certificates</h3>
+            <p class="muted">
+              Your uploads are stored locally in your browser (not sent anywhere). You can clear them anytime.
+            </p>
+
+            <div class="upload">
+              <label class="upload__drop" for="certInput">
+                <input id="certInput" type="file" accept="image/*,application/pdf" multiple />
+                <div class="upload__title">Click to upload</div>
+                <div class="upload__hint">PNG / JPG / PDF • multiple files allowed</div>
+              </label>
+
+              <div class="upload__actions">
+                <button class="btn btn--primary" id="saveCertsBtn" type="button">Save to Browser</button>
+                <button class="btn btn--ghost" id="clearCertsBtn" type="button">Clear Saved</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="glass pad">
+            <div class="row-between">
+              <h3 class="h3">Your Certificates</h3>
+              <span class="badge" id="certCount">0</span>
+            </div>
+            <div class="certs" id="certList" aria-live="polite"></div>
+          </div>
+        </div>
+
+        <div class="glass pad mt">
+          <h3 class="h3">Notes</h3>
+          <ul class="list">
+            <li>Successfully completed certification in relevant technical domain.</li>
+            <li>Shared and documented learning on LinkedIn.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ═══════════════ INTERNSHIP ═══════════════ -->
+      <section class="section container" id="internship">
+        <header class="section__header">
+          <h2 class="section__title" data-animate="letters">Internship</h2>
+          <p class="section__subtitle">Industry exposure and hands-on experience.</p>
+        </header>
+
+        <div class="glass pad">
+          <div class="row-between">
+            <h3 class="h3">Web Intern — Codec Technologies</h3>
+            <span class="badge">Dec 2025 – Jan 2026</span>
+          </div>
+          <p class="muted">
+            Worked on web development tasks and contributed to practical implementation under real project constraints.
+          </p>
+        </div>
+      </section>
+
+      <!-- ═══════════════ ACHIEVEMENTS ═══════════════ -->
+      <section class="section container" id="achievements">
+        <header class="section__header">
+          <h2 class="section__title" data-animate="letters">Achievements</h2>
+          <p class="section__subtitle">What I'm proud of and what I'm building next.</p>
+        </header>
+
+        <div class="achievements">
+          <div class="glass pad">
+            <h3 class="h3">Real-world building</h3>
+            <p class="muted">Actively working on real-world projects in AI and Full Stack Development.</p>
+          </div>
+          <div class="glass pad">
+            <h3 class="h3">Strong fundamentals</h3>
+            <p class="muted">Strong foundation in Data Structures and Algorithms.</p>
+          </div>
+          <div class="glass pad">
+            <h3 class="h3">Consistent learner</h3>
+            <p class="muted">Focused on practical implementation and continuous improvement.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════ CONTACT ═══════════════ -->
+      <section class="section container" id="contact">
+        <header class="section__header">
+          <h2 class="section__title" data-animate="letters">Contact</h2>
+          <p class="section__subtitle">Let's connect and build something impactful.</p>
+        </header>
+
+        <div class="grid-2">
+          <form class="glass pad" id="contactForm">
+            <h3 class="h3">Send a message</h3>
+            <div class="field">
+              <label for="name">Name</label>
+              <input id="name" name="name" type="text" placeholder="Your name" autocomplete="name" required />
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" placeholder="you@example.com" autocomplete="email" required />
+            </div>
+            <div class="field">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="5" placeholder="Tell me about your idea..." required></textarea>
+            </div>
+            <div class="row-between">
+              <button class="btn btn--primary" type="submit">Send</button>
+              <span class="muted small" id="formNote">This form opens your email app.</span>
+            </div>
+          </form>
+
+          <div class="glass pad">
+            <h3 class="h3">Details</h3>
+            <div class="contact-list">
+              <a class="contact-item" href="mailto:ayushtripathi9821@gmail.com">
+                <span class="contact-item__k">Email</span>
+                <span class="contact-item__v">ayushtripathi9821@gmail.com</span>
+              </a>
+              <a class="contact-item" href="https://linkedin.com/in/ayush-tripathi45" target="_blank" rel="noreferrer">
+                <span class="contact-item__k">LinkedIn</span>
+                <span class="contact-item__v">ayush-tripathi45</span>
+              </a>
+              <a class="contact-item" href="https://github.com/ayushtripathi-45" target="_blank" rel="noreferrer">
+                <span class="contact-item__k">GitHub</span>
+                <span class="contact-item__v">ayushtripathi-45</span>
+              </a>
+            </div>
+
+            <div class="divider"></div>
+
+            <h3 class="h3">Short Bio</h3>
+            <p class="muted">
+              Computer Science student passionate about building impactful digital solutions using modern web technologies and AI.
+              Focused on continuous learning and real-world problem solving.
+            </p>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="footer container">
+      <div class="footer__inner glass">
+        <div class="footer__left">
+          <div class="brand brand--mini">
+            <span class="brand__dot" aria-hidden="true"></span>
+            <span class="brand__text">Ayush Tripathi</span>
+          </div>
+          <p class="muted small">Built with HTML, CSS & JavaScript.</p>
+        </div>
+        <div class="footer__right">
+          <a class="muted small" href="#home">Back to top</a>
+          <span class="muted small">•</span>
+          <span class="muted small" id="year"></span>
+        </div>
+      </div>
+    </footer>
+
+    <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
