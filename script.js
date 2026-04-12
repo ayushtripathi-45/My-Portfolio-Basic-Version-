@@ -2,7 +2,6 @@
    Portfolio Script — Animations, Scroll-spy, Interactions
    ============================================================ */
 
-const CERTS_KEY = "ayush_portfolio_certs_v1";
 
 function $(sel) {
   return document.querySelector(sel);
@@ -243,168 +242,7 @@ function initCursorGlow() {
   document.addEventListener("mouseleave", () => (glow.style.opacity = "0"));
 }
 
-/* ============ CERTIFICATIONS ============ */
 
-async function fileToDataUrl(file) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onerror = () => reject(new Error("Failed to read file"));
-    reader.onload = () => resolve(String(reader.result || ""));
-    reader.readAsDataURL(file);
-  });
-}
-
-function formatBytes(bytes) {
-  const units = ["B", "KB", "MB", "GB"];
-  let n = bytes;
-  let i = 0;
-  while (n >= 1024 && i < units.length - 1) { n /= 1024; i++; }
-  return `${n.toFixed(i === 0 ? 0 : 1)} ${units[i]}`;
-}
-
-function loadSavedCerts() {
-  try {
-    const raw = localStorage.getItem(CERTS_KEY);
-    if (!raw) return [];
-    const parsed = JSON.parse(raw);
-    if (!Array.isArray(parsed)) return [];
-    return parsed.filter(
-      (x) =>
-        x &&
-        typeof x.id === "string" &&
-        typeof x.name === "string" &&
-        typeof x.type === "string" &&
-        typeof x.size === "number" &&
-        typeof x.dataUrl === "string" &&
-        typeof x.addedAt === "number"
-    );
-  } catch { return []; }
-}
-
-function saveCerts(certs) {
-  localStorage.setItem(CERTS_KEY, JSON.stringify(certs));
-}
-
-function isImageType(type) {
-  return type.startsWith("image/");
-}
-
-function renderCerts(certs) {
-  const list = $("#certList");
-  const count = $("#certCount");
-  if (!list || !count) return;
-
-  count.textContent = String(certs.length);
-  if (certs.length === 0) {
-    list.innerHTML =
-      '<div class="muted small">No certificates saved yet. Upload and click "Save to Browser".</div>';
-    return;
-  }
-
-  list.innerHTML = certs
-    .slice()
-    .sort((a, b) => b.addedAt - a.addedAt)
-    .map((c) => {
-      const thumb = isImageType(c.type)
-        ? `<img alt="" src="${c.dataUrl}" />`
-        : `<div class="muted" style="font-weight:900;">PDF</div>`;
-      const safeName = escapeHtml(c.name);
-      const safeType = escapeHtml(c.type);
-      const added = new Date(c.addedAt).toLocaleDateString();
-      return `
-        <div class="cert" data-id="${c.id}">
-          <div class="cert__thumb">${thumb}</div>
-          <div class="cert__meta">
-            <div class="cert__name" title="${safeName}">${safeName}</div>
-            <div class="cert__sub">${safeType} • ${formatBytes(c.size)} • ${added}</div>
-          </div>
-          <div class="cert__actions">
-            <button class="icon-btn" type="button" data-action="open" aria-label="Open certificate">↗</button>
-            <button class="icon-btn" type="button" data-action="remove" aria-label="Remove certificate">✕</button>
-          </div>
-        </div>
-      `;
-    })
-    .join("");
-}
-
-function initCertifications() {
-  const input = $("#certInput");
-  const saveBtn = $("#saveCertsBtn");
-  const clearBtn = $("#clearCertsBtn");
-  if (!input || !saveBtn || !clearBtn) return;
-
-  let saved = loadSavedCerts();
-  renderCerts(saved);
-
-  $("#certList")?.addEventListener("click", (e) => {
-    const t = e.target;
-    if (!(t instanceof Element)) return;
-    const btn = t.closest("button");
-    if (!btn) return;
-    const action = btn.getAttribute("data-action");
-    const row = btn.closest(".cert");
-    const id = row?.getAttribute("data-id");
-    if (!id || !action) return;
-
-    const cert = saved.find((c) => c.id === id);
-    if (!cert) return;
-
-    if (action === "open") {
-      const win = window.open();
-      if (!win) { toast("Popup blocked — allow popups to preview."); return; }
-      win.document.title = cert.name;
-      if (isImageType(cert.type)) {
-        win.document.body.style.margin = "0";
-        win.document.body.innerHTML = `<img src="${cert.dataUrl}" alt="" style="max-width:100%;height:auto;display:block;margin:0 auto;" />`;
-      } else {
-        win.location.href = cert.dataUrl;
-      }
-    }
-
-    if (action === "remove") {
-      saved = saved.filter((c) => c.id !== id);
-      saveCerts(saved);
-      renderCerts(saved);
-      toast("Removed certificate");
-    }
-  });
-
-  saveBtn.addEventListener("click", async () => {
-    const files = Array.from(input.files || []);
-    if (files.length === 0) { toast("Choose certificate files first"); return; }
-
-    const newItems = [];
-    for (const f of files) {
-      if (f.size > 6 * 1024 * 1024) { toast(`Skipped "${f.name}" (max 6MB)`); continue; }
-      try {
-        const dataUrl = await fileToDataUrl(f);
-        newItems.push({
-          id: crypto?.randomUUID ? crypto.randomUUID() : `${Date.now()}_${Math.random()}`,
-          name: f.name,
-          type: f.type || "application/octet-stream",
-          size: f.size,
-          dataUrl,
-          addedAt: Date.now(),
-        });
-      } catch { toast(`Failed to read "${f.name}"`); }
-    }
-
-    if (newItems.length === 0) return;
-    saved = [...newItems, ...saved].slice(0, 24);
-    saveCerts(saved);
-    renderCerts(saved);
-    input.value = "";
-    toast("Certificates saved ✓");
-  });
-
-  clearBtn.addEventListener("click", () => {
-    localStorage.removeItem(CERTS_KEY);
-    saved = [];
-    renderCerts(saved);
-    toast("Cleared saved certificates");
-  });
-}
 
 /* ============ CONTACT FORM ============ */
 
@@ -455,7 +293,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initMobileNav();
   initScrollSpy();
   initScrollReveal();
-  initCertifications();
   initContactForm();
   initToasts();
   initYear();

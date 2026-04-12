@@ -237,7 +237,6 @@
           <article class="project glass pad">
             <div class="project__top">
               <h3 class="h3">AI Social Media Dashboard</h3>
-              <span class="badge badge--status">In Progress</span>
             </div>
             <p class="muted">
               A full-stack web application that provides real-time insights, analytics, and AI-powered content recommendations for social media data. Includes interactive charts, engagement tracking, and sentiment analysis.
@@ -276,7 +275,6 @@
           <article class="project glass pad">
             <div class="project__top">
               <h3 class="h3">NotesShare Platform</h3>
-              <span class="badge badge--status">In Progress</span>
             </div>
             <p class="muted">
               A collaborative platform where students can upload, share, and discover academic notes by subject, branch, and semester. Features include search, rating system, and PDF preview.
@@ -327,42 +325,79 @@
           </p>
         </header>
 
-        <div class="grid-2">
-          <div class="glass pad">
-            <h3 class="h3">Upload Certificates</h3>
-            <p class="muted">
-              Your uploads are stored locally in your browser (not sent anywhere). You can clear them anytime.
-            </p>
-
-            <div class="upload">
-              <label class="upload__drop" for="certInput">
-                <input id="certInput" type="file" accept="image/*,application/pdf" multiple />
-                <div class="upload__title">Click to upload</div>
-                <div class="upload__hint">PNG / JPG / PDF • multiple files allowed</div>
-              </label>
-
-              <div class="upload__actions">
-                <button class="btn btn--primary" id="saveCertsBtn" type="button">Save to Browser</button>
-                <button class="btn btn--ghost" id="clearCertsBtn" type="button">Clear Saved</button>
+        <div class="certs-grid">
+          <!-- Cert 1 -->
+          <article class="cert-card glass">
+            <div class="cert-card__image">
+              <img src="assets/certs/python-essentials-1.png" alt="Python Essentials 1 Certificate" loading="lazy" />
+              <div class="cert-card__overlay">
+                <button class="btn btn--mini" onclick="window.open(this.previousElementSibling.src)">View Full</button>
               </div>
             </div>
-          </div>
-
-          <div class="glass pad">
-            <div class="row-between">
-              <h3 class="h3">Your Certificates</h3>
-              <span class="badge" id="certCount">0</span>
+            <div class="cert-card__content pad">
+              <h3 class="h3">Python Essentials 1</h3>
+              <p class="muted">Cisco | Python Institute</p>
+              <div class="tag-row mt">
+                <span class="tag">Python</span>
+                <span class="tag">Basics</span>
+              </div>
             </div>
-            <div class="certs" id="certList" aria-live="polite"></div>
-          </div>
-        </div>
+          </article>
 
-        <div class="glass pad mt">
-          <h3 class="h3">Notes</h3>
-          <ul class="list">
-            <li>Successfully completed certification in relevant technical domain.</li>
-            <li>Shared and documented learning on LinkedIn.</li>
-          </ul>
+          <!-- Cert 2 -->
+          <article class="cert-card glass">
+            <div class="cert-card__image">
+              <img src="assets/certs/python-essentials-2.png" alt="Python Essentials 2 Certificate" loading="lazy" />
+              <div class="cert-card__overlay">
+                <button class="btn btn--mini" onclick="window.open(this.previousElementSibling.src)">View Full</button>
+              </div>
+            </div>
+            <div class="cert-card__content pad">
+              <h3 class="h3">Python Essentials 2</h3>
+              <p class="muted">Cisco | Python Institute</p>
+              <div class="tag-row mt">
+                <span class="tag">Python</span>
+                <span class="tag">Advanced</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Cert 3 -->
+          <article class="cert-card glass">
+            <div class="cert-card__image">
+              <img src="assets/certs/fullstack-crash-course.png" alt="Full Stack Crash Course Certificate" loading="lazy" />
+              <div class="cert-card__overlay">
+                <button class="btn btn--mini" onclick="window.open(this.previousElementSibling.src)">View Full</button>
+              </div>
+            </div>
+            <div class="cert-card__content pad">
+              <h3 class="h3">Full Stack Crash Course</h3>
+              <p class="muted">Udemy | Proper Dot Institute</p>
+              <div class="tag-row mt">
+                <span class="tag">JS</span>
+                <span class="tag">Bootstrap</span>
+                <span class="tag">PHP</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Cert 4 -->
+          <article class="cert-card glass">
+            <div class="cert-card__image">
+              <img src="assets/certs/gfg-python.png" alt="GeeksforGeeks Python Certificate" loading="lazy" />
+              <div class="cert-card__overlay">
+                <button class="btn btn--mini" onclick="window.open(this.previousElementSibling.src)">View Full</button>
+              </div>
+            </div>
+            <div class="cert-card__content pad">
+              <h3 class="h3">Python Course</h3>
+              <p class="muted">GeeksforGeeks</p>
+              <div class="tag-row mt">
+                <span class="tag">Python</span>
+                <span class="tag">GFG</span>
+              </div>
+            </div>
+          </article>
         </div>
       </section>
 
