@@ -139,6 +139,7 @@ body::after {
 .skip-link:focus { left: 1rem; top: 1rem; outline: none; box-shadow: var(--focus-ring); }
 
 .pad { padding: 1.5rem; }
+.pad-sm { padding: 1rem; }
 .mt  { margin-top: 1rem; }
 .muted { color: var(--text-dim); }
 .small { font-size: .875rem; }
@@ -856,8 +857,8 @@ textarea:focus-visible {
 
 .certs-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
 }
 
 .cert-card {
