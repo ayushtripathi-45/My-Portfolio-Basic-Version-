@@ -141,6 +141,7 @@ body::after {
 .pad { padding: 1.5rem; }
 .pad-sm { padding: 1rem; }
 .mt  { margin-top: 1rem; }
+.mb-sm { margin-bottom: .75rem; }
 .muted { color: var(--text-dim); }
 .small { font-size: .875rem; }
 
