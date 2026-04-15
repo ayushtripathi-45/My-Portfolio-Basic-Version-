@@ -242,6 +242,70 @@ function initCursorGlow() {
   document.addEventListener("mouseleave", () => (glow.style.opacity = "0"));
 }
 
+/* ============ SCROLL-REACTIVE BACKGROUND ============ */
+
+function initDynamicBackground() {
+  const sections = Array.from(document.querySelectorAll("main section[id]"));
+  if (!sections.length) return;
+
+  const rootStyle = document.documentElement.style;
+  const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const paletteBySection = {
+    home: ["rgba(139, 92, 246, 0.16)", "rgba(6, 214, 160, 0.10)", "rgba(244, 114, 182, 0.09)", "rgba(59, 130, 246, 0.08)"],
+    about: ["rgba(99, 102, 241, 0.16)", "rgba(45, 212, 191, 0.10)", "rgba(168, 85, 247, 0.08)", "rgba(56, 189, 248, 0.08)"],
+    skills: ["rgba(6, 214, 160, 0.15)", "rgba(20, 184, 166, 0.10)", "rgba(139, 92, 246, 0.08)", "rgba(59, 130, 246, 0.08)"],
+    projects: ["rgba(244, 114, 182, 0.15)", "rgba(99, 102, 241, 0.10)", "rgba(6, 214, 160, 0.09)", "rgba(251, 146, 60, 0.08)"],
+    certifications: ["rgba(59, 130, 246, 0.16)", "rgba(6, 214, 160, 0.10)", "rgba(217, 70, 239, 0.08)", "rgba(139, 92, 246, 0.08)"],
+    internship: ["rgba(245, 158, 11, 0.14)", "rgba(6, 182, 212, 0.10)", "rgba(139, 92, 246, 0.09)", "rgba(244, 114, 182, 0.08)"],
+    achievements: ["rgba(16, 185, 129, 0.15)", "rgba(96, 165, 250, 0.10)", "rgba(139, 92, 246, 0.08)", "rgba(244, 114, 182, 0.08)"],
+    contact: ["rgba(139, 92, 246, 0.18)", "rgba(34, 197, 94, 0.10)", "rgba(59, 130, 246, 0.09)", "rgba(251, 146, 60, 0.08)"],
+  };
+
+  function applyPalette(id) {
+    const colors = paletteBySection[id] || paletteBySection.home;
+    rootStyle.setProperty("--bg-dyn-1", colors[0]);
+    rootStyle.setProperty("--bg-dyn-2", colors[1]);
+    rootStyle.setProperty("--bg-dyn-3", colors[2]);
+    rootStyle.setProperty("--bg-dyn-4", colors[3]);
+  }
+
+  let currentSectionId = "home";
+  applyPalette(currentSectionId);
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && entry.intersectionRatio > 0.45) {
+          const id = entry.target.getAttribute("id") || "home";
+          if (id !== currentSectionId) {
+            currentSectionId = id;
+            applyPalette(currentSectionId);
+          }
+        }
+      });
+    },
+    { threshold: [0.45, 0.6], rootMargin: "-15% 0px -35% 0px" }
+  );
+
+  sections.forEach((section) => observer.observe(section));
+
+  if (prefersReduced) return;
+
+  // Small scroll interpolation to keep color transitions fluid between sections.
+  const maxScroll = () => Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
+  let rafId = 0;
+  function onScroll() {
+    if (rafId) return;
+    rafId = window.requestAnimationFrame(() => {
+      rafId = 0;
+      const progress = Math.min(window.scrollY / maxScroll(), 1);
+      rootStyle.setProperty("--bg-dyn-4", `rgba(59, 130, 246, ${0.05 + progress * 0.08})`);
+    });
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+}
+
 
 
 /* ============ CONTACT FORM ============ */
@@ -297,4 +361,5 @@ document.addEventListener("DOMContentLoaded", () => {
   initToasts();
   initYear();
   initCursorGlow();
+  initDynamicBackground();
 });

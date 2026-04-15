@@ -65,6 +65,12 @@
 
   /* Focus */
   --focus-ring: 0 0 0 3px rgba(139, 92, 246, 0.4);
+
+  /* Scroll-reactive background colors */
+  --bg-dyn-1: rgba(139, 92, 246, 0.12);
+  --bg-dyn-2: rgba(6, 214, 160, 0.09);
+  --bg-dyn-3: rgba(244, 114, 182, 0.08);
+  --bg-dyn-4: rgba(59, 130, 246, 0.07);
 }
 
 /* ============ RESET ============ */
@@ -75,13 +81,18 @@ body {
   margin: 0;
   font-family: 'Outfit', system-ui, -apple-system, sans-serif;
   color: var(--text);
-  background: var(--bg0);
+  background:
+    radial-gradient(1200px 900px at 12% 8%, var(--bg-dyn-1), transparent 62%),
+    radial-gradient(900px 700px at 88% 14%, var(--bg-dyn-2), transparent 58%),
+    radial-gradient(1100px 850px at 50% 92%, var(--bg-dyn-3), transparent 62%),
+    linear-gradient(180deg, var(--bg0) 0%, var(--bg1) 45%, var(--bg2) 100%);
   min-height: 100vh;
   overflow-x: hidden;
   line-height: 1.6;
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background 700ms ease;
 }
 
 /* Scroll snap */
@@ -99,10 +110,11 @@ body::before {
   position: fixed; inset: 0;
   pointer-events: none; z-index: -2;
   background:
-    radial-gradient(ellipse 900px 700px at 12% 8%, rgba(139, 92, 246, 0.08), transparent 60%),
-    radial-gradient(ellipse 700px 500px at 88% 12%, rgba(6, 214, 160, 0.05), transparent 55%),
-    radial-gradient(ellipse 900px 700px at 50% 92%, rgba(244, 114, 182, 0.04), transparent 60%),
-    radial-gradient(ellipse 500px 350px at 30% 55%, rgba(59, 130, 246, 0.03), transparent 50%);
+    radial-gradient(ellipse 900px 700px at 12% 8%, var(--bg-dyn-1), transparent 60%),
+    radial-gradient(ellipse 700px 500px at 88% 12%, var(--bg-dyn-2), transparent 55%),
+    radial-gradient(ellipse 900px 700px at 50% 92%, var(--bg-dyn-3), transparent 60%),
+    radial-gradient(ellipse 500px 350px at 30% 55%, var(--bg-dyn-4), transparent 50%);
+  transition: background 700ms ease, opacity 600ms ease;
 }
 
 /* Noise */
