@@ -212,35 +212,6 @@ function initScrollReveal() {
   items.forEach((el) => obs.observe(el));
 }
 
-/* ============ CURSOR GLOW (desktop only) ============ */
-
-function initCursorGlow() {
-  if (window.matchMedia("(hover: none)").matches) return;
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-  const glow = document.createElement("div");
-  glow.setAttribute("aria-hidden", "true");
-  Object.assign(glow.style, {
-    position: "fixed",
-    width: "340px",
-    height: "340px",
-    borderRadius: "50%",
-    background: "radial-gradient(circle, rgba(139,92,246,0.05), transparent 70%)",
-    pointerEvents: "none",
-    zIndex: "0",
-    transform: "translate(-50%, -50%)",
-    transition: "left .12s ease, top .12s ease, opacity .3s ease",
-    opacity: "0",
-  });
-  document.body.appendChild(glow);
-
-  document.addEventListener("mousemove", (e) => {
-    glow.style.left = e.clientX + "px";
-    glow.style.top = e.clientY + "px";
-    glow.style.opacity = "1";
-  });
-  document.addEventListener("mouseleave", () => (glow.style.opacity = "0"));
-}
 
 /* ============ SCROLL-REACTIVE BACKGROUND ============ */
 
@@ -308,6 +279,51 @@ function initDynamicBackground() {
 
 
 
+/* ============ PROJECT TABS ============ */
+function initProjectTabs() {
+  const tabsNav = $(".tabs-nav");
+  const tabBtns = document.querySelectorAll(".tab-btn");
+  const tabPanels = document.querySelectorAll(".tab-panel");
+  const indicator = $(".tab-indicator");
+
+  if (!tabsNav || !tabBtns.length || !indicator) return;
+
+  function updateIndicator(btn) {
+    indicator.style.width = `${btn.offsetWidth}px`;
+    indicator.style.left = `${btn.offsetLeft}px`;
+  }
+
+  // Initial indicator position
+  const activeBtn = tabsNav.querySelector(".tab-btn.is-active");
+  if (activeBtn) updateIndicator(activeBtn);
+
+  tabBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const targetTab = btn.getAttribute("data-tab");
+
+      // Update buttons
+      tabBtns.forEach((b) => b.classList.remove("is-active"));
+      btn.classList.add("is-active");
+
+      // Update indicator
+      updateIndicator(btn);
+
+      // Update panels
+      tabPanels.forEach((panel) => {
+        panel.classList.toggle("is-active", panel.id === targetTab);
+      });
+    });
+  });
+
+  // Handle resize for indicator
+  window.addEventListener("resize", () => {
+    const currentActive = tabsNav.querySelector(".tab-btn.is-active");
+    if (currentActive) updateIndicator(currentActive);
+  });
+}
+
+
+
 /* ============ CONTACT FORM ============ */
 
 function initContactForm() {
@@ -358,8 +374,8 @@ document.addEventListener("DOMContentLoaded", () => {
   initScrollSpy();
   initScrollReveal();
   initContactForm();
+  initProjectTabs();
   initToasts();
   initYear();
-  initCursorGlow();
   initDynamicBackground();
 });
