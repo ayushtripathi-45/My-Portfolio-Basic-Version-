@@ -15,7 +15,7 @@
 </p>
 
 <p align="center">
-  <a href="https://ayushtripathi-45.github.io/My-Portfolio-Basic-Version-/">🌐 Live Demo</a> •
+  <a href="https://my-portfolio-basic-version.vercel.app/">🌐 Live Demo</a> •
   <a href="#-screenshots">📸 Screenshots</a> •
   <a href="#-features">✨ Features</a> •
   <a href="#-tech-stack">🛠 Tech Stack</a>
