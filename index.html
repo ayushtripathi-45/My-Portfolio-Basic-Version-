@@ -10,19 +10,52 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
     rel="stylesheet" />
   <link rel="stylesheet" href="./styles.css" />
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
 </head>
 
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
+  <!-- Custom Modern Cursor with Tail -->
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-trail"></div>
+  <div class="cursor-trail"></div>
+  <div class="cursor-trail"></div>
+  <div class="cursor-trail"></div>
+  <div class="cursor-trail"></div>
+  <div class="cursor-trail"></div>
+  <div class="cursor-trail"></div>
+
+  <!-- Transition Overlay -->
+  <div class="transition-overlay" id="transitionOverlay">
+    <div class="transition-text" id="transitionText">ABOUT</div>
+  </div>
+
+  <!-- Preloader / Welcome Effect -->
+  <div class="preloader" id="preloader">
+    <div class="preloader__content">
+        <div class="preloader__text" id="preloaderText">Welcome</div>
+        <div class="preloader__percent" id="preloaderPercent">0%</div>
+        <div class="preloader__bar"></div>
+    </div>
+  </div>
+
+  <!-- Premium Futuristic Background -->
   <div class="bg">
-    <div class="orb orb-1" aria-hidden="true"></div>
-    <div class="orb orb-2" aria-hidden="true"></div>
-    <div class="orb orb-3" aria-hidden="true"></div>
-    <div class="grid" aria-hidden="true"></div>
+    <div class="aurora"></div>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+    <div class="grid-overlay"></div>
+    <div class="stars"></div>
+    <div class="vignette"></div>
+    <div class="noise"></div>
+    <div class="vertical-line">
+        <div class="line-dot"></div>
+    </div>
   </div>
 
   <header class="header">
@@ -585,10 +618,6 @@
           </div>
         </div>
       </div>
-
-
-
-      </div>
     </section>
 
     <!-- ═══════════════ CERTIFICATIONS ═══════════════ -->
@@ -970,7 +999,47 @@
 
   <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
 
+  <div id="spotlight" class="spotlight"></div>
+
   <script src="./script.js"></script>
+  <script>
+    // Integration of mouse interactions for the new background
+    const spotlight = document.getElementById('spotlight');
+    const grid = document.querySelector('.grid-overlay');
+    
+    if (spotlight) {
+      document.addEventListener('mousemove', (e) => {
+        const x = e.clientX;
+        const y = e.clientY;
+        
+        // Move spotlight
+        spotlight.style.left = x - 200 + 'px';
+        spotlight.style.top = y - 200 + 'px';
+
+        // Move grid (Parallax effect)
+        if (grid) {
+            const moveX = (x / window.innerWidth - 0.5) * 60; // Max 60px shift
+            const moveY = (y / window.innerHeight - 0.5) * 60;
+            grid.style.transform = `translate(${moveX}px, ${moveY}px)`;
+            
+            // Update grid mask position for interactive "glow"
+            const pctX = (x / window.innerWidth) * 100;
+            const pctY = (y / window.innerHeight) * 100;
+            grid.style.setProperty('--grid-mouse-x', pctX + '%');
+            grid.style.setProperty('--grid-mouse-y', pctY + '%');
+        }
+
+        const cards = document.querySelectorAll('.glass');
+        cards.forEach(card => {
+          const rect = card.getBoundingClientRect();
+          const cardX = x - rect.left;
+          const cardY = y - rect.top;
+          card.style.setProperty('--mouse-x', cardX + 'px');
+          card.style.setProperty('--mouse-y', cardY + 'px');
+        });
+      });
+    }
+  </script>
 </body>
 
 </html>

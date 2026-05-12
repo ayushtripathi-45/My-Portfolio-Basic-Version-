@@ -2,6 +2,89 @@
    Portfolio Script — Animations, Scroll-spy, Interactions
    ============================================================ */
 
+function initCustomCursor() {
+  const dot = $("#cursorDot");
+  const trails = document.querySelectorAll(".cursor-trail");
+  if (!dot) return;
+
+  let mouseX = 0;
+  let mouseY = 0;
+  
+  // Store positions for each trail segment
+  const positions = Array.from({ length: trails.length + 1 }, () => ({ x: 0, y: 0 }));
+
+  window.addEventListener("mousemove", (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    
+    dot.style.left = `${mouseX}px`;
+    dot.style.top = `${mouseY}px`;
+  });
+
+  function animate() {
+    // Update first position to mouse
+    positions[0].x += (mouseX - positions[0].x) * 0.2;
+    positions[0].y += (mouseY - positions[0].y) * 0.2;
+    
+    // Update each trail segment to follow the one before it
+    for (let i = 0; i < trails.length; i++) {
+        const prev = positions[i];
+        const current = positions[i + 1];
+        
+        current.x += (prev.x - current.x) * 0.35;
+        current.y += (prev.y - current.y) * 0.35;
+        
+        trails[i].style.left = `${current.x}px`;
+        trails[i].style.top = `${current.y}px`;
+    }
+    
+    requestAnimationFrame(animate);
+  }
+  animate();
+
+  // Handle hover states
+  const interactives = document.querySelectorAll("a, button, .glass, .chip, .tab-btn");
+  interactives.forEach(el => {
+    el.addEventListener("mouseenter", () => document.body.classList.add("cursor-hover"));
+    el.addEventListener("mouseleave", () => document.body.classList.remove("cursor-hover"));
+  });
+}
+
+/**
+ * Intercept navigation clicks for a cool section transition animation.
+ */
+function initSectionTransitions() {
+  const overlay = $("#transitionOverlay");
+  const text = $("#transitionText");
+  const navLinks = document.querySelectorAll('a[href^="#"]:not(.skip-link)');
+  if (!overlay || !text || !navLinks.length) return;
+
+  navLinks.forEach(link => {
+    link.addEventListener("click", (e) => {
+      const targetId = link.getAttribute("href");
+      if (targetId === "#") return;
+      
+      const targetSection = $(targetId);
+      if (!targetSection) return;
+
+      e.preventDefault();
+
+      // Set the transition text to the link name
+      const linkText = link.textContent.trim();
+      text.textContent = linkText;
+
+      // Trigger the transition sweep
+      overlay.classList.remove("animate");
+      void overlay.offsetWidth; // Force reflow
+      overlay.classList.add("animate");
+
+      // Scroll to section halfway through the animation
+      setTimeout(() => {
+        targetSection.scrollIntoView({ behavior: "smooth" });
+      }, 500);
+    });
+  });
+}
 
 function $(sel) {
   return document.querySelector(sel);
@@ -25,7 +108,69 @@ function toast(msg, ms = 2500) {
   toast._t = window.setTimeout(() => el.classList.remove("show"), ms);
 }
 
+/* ============ PRELOADER ============ */
+
+function initPreloader() {
+  const preloader = $("#preloader");
+  const preloaderText = $("#preloaderText");
+  const preloaderPercent = $("#preloaderPercent");
+  if (!preloader || !preloaderText || !preloaderPercent) return;
+
+  const greetings = [
+    "Welcome",    // 0-20%
+    "Namaste",    // 21-40%
+    "Hello",      // 41-60%
+    "Hola",       // 61-80%
+    "Bonjour",    // 81-100%
+  ];
+
+  let count = 0;
+  let greetingIndex = 0;
+  
+  // Start the loading bar animation visually
+  setTimeout(() => {
+    preloader.classList.add("preloader--active");
+  }, 100);
+
+  const counterInterval = setInterval(() => {
+    count++;
+    preloaderPercent.textContent = `${count}%`;
+    
+    // Update greeting based on percentage brackets
+    const newIndex = Math.min(Math.floor(count / 20.01), greetings.length - 1);
+    if (newIndex !== greetingIndex) {
+        greetingIndex = newIndex;
+        preloaderText.classList.remove("active");
+        setTimeout(() => {
+            preloaderText.textContent = greetings[greetingIndex];
+            preloaderText.classList.add("active");
+        }, 200);
+    }
+
+    if (count >= 100) {
+      clearInterval(counterInterval);
+      setTimeout(finishPreloader, 500);
+    }
+  }, 35); // Approx 3.5 seconds total
+
+  // Initial show
+  preloaderText.classList.add("active");
+
+  function finishPreloader() {
+    preloader.classList.add("preloader--hidden");
+    setTimeout(() => {
+      preloader.remove();
+      // Trigger hero animations only after preloader is gone
+      document.body.classList.add("loaded");
+      animateHeroTitle();
+      animateHeroSubtitle();
+    }, 800);
+  }
+}
+
+
 /* ============ MOBILE NAV ============ */
+
 
 function initMobileNav() {
   const toggle = $("#navToggle");
@@ -223,14 +368,14 @@ function initDynamicBackground() {
   const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   const paletteBySection = {
-    home: ["rgba(139, 92, 246, 0.16)", "rgba(6, 214, 160, 0.10)", "rgba(244, 114, 182, 0.09)", "rgba(59, 130, 246, 0.08)"],
-    about: ["rgba(99, 102, 241, 0.16)", "rgba(45, 212, 191, 0.10)", "rgba(168, 85, 247, 0.08)", "rgba(56, 189, 248, 0.08)"],
-    skills: ["rgba(6, 214, 160, 0.15)", "rgba(20, 184, 166, 0.10)", "rgba(139, 92, 246, 0.08)", "rgba(59, 130, 246, 0.08)"],
-    projects: ["rgba(244, 114, 182, 0.15)", "rgba(99, 102, 241, 0.10)", "rgba(6, 214, 160, 0.09)", "rgba(251, 146, 60, 0.08)"],
-    certifications: ["rgba(59, 130, 246, 0.16)", "rgba(6, 214, 160, 0.10)", "rgba(217, 70, 239, 0.08)", "rgba(139, 92, 246, 0.08)"],
-    internship: ["rgba(245, 158, 11, 0.14)", "rgba(6, 182, 212, 0.10)", "rgba(139, 92, 246, 0.09)", "rgba(244, 114, 182, 0.08)"],
-    achievements: ["rgba(16, 185, 129, 0.15)", "rgba(96, 165, 250, 0.10)", "rgba(139, 92, 246, 0.08)", "rgba(244, 114, 182, 0.08)"],
-    contact: ["rgba(139, 92, 246, 0.18)", "rgba(34, 197, 94, 0.10)", "rgba(59, 130, 246, 0.09)", "rgba(251, 146, 60, 0.08)"],
+    home: ["rgba(139, 92, 246, 0.35)", "rgba(6, 214, 160, 0.25)", "rgba(244, 114, 182, 0.20)", "rgba(59, 130, 246, 0.20)"],
+    about: ["rgba(99, 102, 241, 0.35)", "rgba(45, 212, 191, 0.25)", "rgba(168, 85, 247, 0.20)", "rgba(56, 189, 248, 0.20)"],
+    skills: ["rgba(6, 214, 160, 0.35)", "rgba(20, 184, 166, 0.25)", "rgba(139, 92, 246, 0.20)", "rgba(59, 130, 246, 0.20)"],
+    projects: ["rgba(244, 114, 182, 0.35)", "rgba(99, 102, 241, 0.25)", "rgba(6, 214, 160, 0.20)", "rgba(251, 146, 60, 0.20)"],
+    certifications: ["rgba(59, 130, 246, 0.35)", "rgba(6, 214, 160, 0.25)", "rgba(217, 70, 239, 0.20)", "rgba(139, 92, 246, 0.20)"],
+    internship: ["rgba(245, 158, 11, 0.35)", "rgba(6, 182, 212, 0.25)", "rgba(139, 92, 246, 0.20)", "rgba(244, 114, 182, 0.20)"],
+    achievements: ["rgba(16, 185, 129, 0.35)", "rgba(96, 165, 250, 0.25)", "rgba(139, 92, 246, 0.20)", "rgba(244, 114, 182, 0.20)"],
+    contact: ["rgba(139, 92, 246, 0.35)", "rgba(34, 197, 94, 0.25)", "rgba(59, 130, 246, 0.20)", "rgba(251, 146, 60, 0.20)"],
   };
 
   function applyPalette(id) {
@@ -364,9 +509,16 @@ function initYear() {
 /* ============ INIT ============ */
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Text animations (run first so elements are ready for reveal)
-  animateHeroTitle();
-  animateHeroSubtitle();
+  // Start preloader (Hero animations will be triggered after preloader finishes)
+  initPreloader();
+  
+  // Custom Modern Cursor
+  initCustomCursor();
+
+  // Cool section transitions
+  initSectionTransitions();
+
+  // Text animations for sections (run first so elements are ready for reveal)
   initSectionTitleAnimations();
 
   // Core features
@@ -379,3 +531,4 @@ document.addEventListener("DOMContentLoaded", () => {
   initYear();
   initDynamicBackground();
 });
+
